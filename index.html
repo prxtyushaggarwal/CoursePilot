@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CoursePilot · Smart Academic Performance & Timetable Attendance Hub</title>
-  <!-- Tailwind CSS -->
+  
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js -->
+  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- FontAwesome Icons -->
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script>
     tailwind.config = {
@@ -59,14 +59,10 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col custom-scroll selection:bg-brand-500 selection:text-white">
 
-  <!-- ========================================== -->
-  <!-- TOP HEADER / NAV BAR                      -->
-  <!-- ========================================== -->
   <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         
-        <!-- Logo & Branding -->
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-indigo-600 to-amber-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
             <i class="fa-solid fa-compass text-white text-lg"></i>
@@ -80,7 +76,6 @@
           </div>
         </div>
 
-        <!-- Navigation Tabs -->
         <nav class="flex items-center gap-1 sm:gap-2">
           <button onclick="switchTab('app')" id="tab-btn-app" class="nav-btn px-3.5 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-brand-600 text-white shadow-md shadow-brand-600/30">
             <i class="fa-solid fa-calendar-day"></i>
@@ -104,17 +99,14 @@
           </button>
         </nav>
 
-        <!-- Right: Notifications & User Auth (Sign In / Sign Out) -->
         <div class="flex items-center gap-3">
           
-          <!-- Exam & Attendance Notification Bell Icon -->
           <div class="relative">
             <button onclick="toggleNotificationDropdown()" class="relative p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="Attendance & Exam Alerts">
               <i class="fa-solid fa-bell"></i>
               <span id="notif-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-rose-500 text-white rounded-full text-[10px] font-bold flex items-center justify-center animate-pulse">2</span>
             </button>
 
-            <!-- Notification Dropdown Menu -->
             <div id="notif-dropdown" class="hidden absolute right-0 mt-2 w-80 sm:w-96 bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl p-4 z-50 space-y-3">
               <div class="flex items-center justify-between pb-2 border-b border-slate-800">
                 <span class="text-xs font-bold text-white flex items-center gap-2">
@@ -123,14 +115,13 @@
                 <span class="text-[10px] text-slate-400">Campus Notification</span>
               </div>
               <div id="notif-items" class="space-y-2 max-h-60 overflow-y-auto custom-scroll text-xs">
-                <!-- Injected via JS -->
+                
               </div>
             </div>
           </div>
 
-          <!-- User Authentication Profile & Sign In / Sign Out Container -->
           <div id="header-user-auth" class="flex items-center gap-2 pl-2 border-l border-slate-800">
-            <!-- Rendered dynamically by updateUserHeader() -->
+            
           </div>
 
         </div>
@@ -139,26 +130,16 @@
     </div>
   </header>
 
-  <!-- ========================================== -->
-  <!-- OVERALL ATTENDANCE DANGER BANNER           -->
-  <!-- ========================================== -->
   <div id="overall-attendance-danger-banner" class="hidden bg-rose-950/80 border-b border-rose-600/80 px-4 py-2.5 text-center text-xs font-bold text-rose-200 shadow-lg flex items-center justify-center gap-3 animate-pulse">
     <i class="fa-solid fa-triangle-exclamation text-rose-400 text-base"></i>
     <span>⚠️ CRITICAL ALERT: Attendance below required criteria (< 75%)! You face exam debarment. Attend upcoming lectures or claim Duty Leave (DL).</span>
     <button onclick="switchTab('app')" class="px-2.5 py-1 rounded bg-rose-600 hover:bg-rose-500 text-white text-[11px] font-bold transition">Check Attendance</button>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MAIN APP CONTAINER                         -->
-  <!-- ========================================== -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
 
-    <!-- ========================================== -->
-    <!-- VIEW 1: DAILY SCHEDULE & LIVE ATTENDANCE   -->
-    <!-- ========================================== -->
     <section id="view-app" class="space-y-8 block">
       
-      <!-- HERO BANNER -->
       <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border border-slate-800 p-6 sm:p-8 shadow-2xl">
         <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
@@ -187,12 +168,11 @@
           </div>
         </div>
 
-        <!-- DAY OF WEEK SELECTOR -->
         <div class="mt-6 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4">
           <div class="flex items-center gap-2">
             <span class="text-xs font-bold uppercase tracking-wider text-slate-400 mr-2">Timetable Day:</span>
             <div class="flex items-center gap-1.5 overflow-x-auto pb-1" id="day-pills">
-              <!-- Rendered via JS: Mon, Tue, Wed, Thu, Fri, Sat, Sun -->
+              
             </div>
           </div>
           <div class="flex items-center gap-4 text-xs text-slate-400">
@@ -204,10 +184,8 @@
         </div>
       </div>
 
-      <!-- ATTENDANCE OVERVIEW CARDS (OVERALL + MARGINS) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Overall Attendance Card -->
         <div class="glass-card rounded-xl p-5 relative overflow-hidden" id="card-overall-att-border">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
             <span>OVERALL ATTENDANCE</span>
@@ -219,7 +197,6 @@
           </div>
         </div>
 
-        <!-- Total Classes Held / Attended -->
         <div class="glass-card rounded-xl p-5 relative overflow-hidden">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
             <span>CLASSES ATTENDED</span>
@@ -231,7 +208,6 @@
           </div>
         </div>
 
-        <!-- Margin to Bunk / Must Attend -->
         <div class="glass-card rounded-xl p-5 relative overflow-hidden">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
             <span>ATTENDANCE BUFFER</span>
@@ -243,7 +219,6 @@
           </div>
         </div>
 
-        <!-- At-Risk Courses Count -->
         <div class="glass-card rounded-xl p-5 relative overflow-hidden border-rose-500/30">
           <div class="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1">
             <span>COURSES IN DANGER</span>
@@ -257,10 +232,8 @@
 
       </div>
 
-      <!-- MAIN SPLIT: TODAY'S CLASS ATTENDANCE (LEFT) + TIMETABLE OVERVIEW & GRAPHS (RIGHT) -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        <!-- LEFT COLUMN (7 COLS): TODAY'S SCHEDULE ROLL CALL -->
         <div class="lg:col-span-7 space-y-6">
           
           <div class="flex items-center justify-between">
@@ -271,17 +244,14 @@
             <span class="text-xs text-slate-400 font-mono">Section K4P26NY</span>
           </div>
 
-          <!-- Class Roll Call Cards Container -->
           <div class="space-y-4" id="daily-classes-container">
-            <!-- Dynamically populated classes for selected day -->
+            
           </div>
 
         </div>
 
-        <!-- RIGHT COLUMN (5 COLS): ATTENDANCE CALCULATOR & PER-COURSE MASTERY CHART -->
         <div class="lg:col-span-5 space-y-6">
           
-          <!-- ATTENDANCE SIMULATOR & CALCULATOR CARD -->
           <div class="glass-card rounded-2xl p-6 border-indigo-500/30 shadow-xl space-y-4">
             <div class="flex items-center justify-between">
               <div>
@@ -308,13 +278,11 @@
               </div>
             </div>
 
-            <!-- Subject Attendance Progress Bars -->
             <div class="space-y-2.5 pt-2" id="subject-attendance-bars">
-              <!-- Dynamically populated attendance bars -->
+              
             </div>
           </div>
 
-          <!-- PER-COURSE VISUAL DIAGNOSTICS & CHART -->
           <div class="glass-card rounded-2xl p-5 border-slate-800 space-y-4">
             <div class="flex items-center justify-between">
               <div>
@@ -322,10 +290,9 @@
                 <h4 class="text-sm font-bold text-white">Attendance & Unit Mastery</h4>
               </div>
 
-              <!-- Course Graph Selector Dropdown -->
               <select id="graph-course-selector" onchange="renderSelectedGraph()" class="bg-slate-800 text-white text-xs rounded-lg px-2.5 py-1 border border-slate-700 font-semibold focus:outline-none focus:border-brand-500">
                 <option value="all">📊 All 6 Courses (Attendance %)</option>
-                <!-- Populated via JS -->
+                
               </select>
             </div>
 
@@ -340,9 +307,6 @@
 
     </section>
 
-    <!-- ========================================== -->
-    <!-- VIEW 2: COURSES & CONTINUOUS ASSESSMENT    -->
-    <!-- ========================================== -->
     <section id="view-courses" class="space-y-8 hidden">
       
       <div class="flex items-center justify-between">
@@ -355,16 +319,12 @@
         </button>
       </div>
 
-      <!-- Course Cards Container -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="all-courses-cards-container">
-        <!-- Injected via JS -->
+        
       </div>
 
     </section>
 
-    <!-- ========================================== -->
-    <!-- VIEW 3: EXAMS (MTT / ETT) HUB              -->
-    <!-- ========================================== -->
     <section id="view-exams" class="space-y-8 hidden">
       
       <div class="glass-card p-6 sm:p-8 rounded-2xl border-slate-800 relative overflow-hidden bg-gradient-to-r from-slate-900 via-amber-950/20 to-slate-900">
@@ -385,16 +345,12 @@
         </div>
       </div>
 
-      <!-- EXAM CARDS GRID -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="exam-cards-container">
-        <!-- Injected via JS -->
+        
       </div>
 
     </section>
 
-    <!-- ========================================== -->
-    <!-- VIEW 4: PRESENTATION (PPT DECK)            -->
-    <!-- ========================================== -->
     <section id="view-slides" class="space-y-6 hidden">
       <div class="glass-card rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4 border-slate-800">
         <div class="flex items-center gap-3">
@@ -435,9 +391,6 @@
       <div class="flex items-center gap-2 overflow-x-auto pb-2 custom-scroll" id="slide-thumbnails"></div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- VIEW 5: COMPLETE CA2 REPORT VIEWER         -->
-    <!-- ========================================== -->
     <section id="view-report" class="space-y-6 hidden">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 glass-card p-6 rounded-2xl border-slate-800">
         <div>
@@ -462,9 +415,6 @@
 
   </main>
 
-  <!-- ========================================== -->
-  <!-- MODAL: STUDENT SIGN IN / LOGIN            -->
-  <!-- ========================================== -->
   <div id="modal-login" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 sm:p-8 space-y-5 shadow-2xl relative">
       <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-sm">
@@ -518,9 +468,6 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- MODAL: EDIT COURSE                         -->
-  <!-- ========================================== -->
   <div id="modal-edit-course" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md hidden p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto custom-scroll">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
@@ -574,15 +521,10 @@
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- FLOATING AI COPILOT CHATBOT                -->
-  <!-- ========================================== -->
   <div id="ai-copilot-container" class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
     
-    <!-- CHATBOT WINDOW -->
     <div id="ai-chat-window" class="hidden w-[390px] sm:w-[450px] h-[600px] max-h-[85vh] bg-slate-900/95 backdrop-blur-xl border border-slate-700/80 rounded-2xl shadow-2xl flex flex-col overflow-hidden mb-3 transition-all duration-300 transform scale-95 opacity-0">
       
-      <!-- CHAT HEADER -->
       <div class="p-4 bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 border-b border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <div class="relative">
@@ -610,7 +552,6 @@
         </div>
       </div>
 
-      <!-- QUICK SUGGESTION CHIPS -->
       <div class="p-2.5 bg-slate-950/70 border-b border-slate-800/80 overflow-x-auto whitespace-nowrap custom-scroll flex items-center gap-1.5 text-[11px]">
         <button onclick="handleQuickPrompt('Check my attendance safety and debarment risk')" class="px-2.5 py-1 rounded-full bg-slate-800 hover:bg-brand-600/30 text-amber-300 hover:text-amber-200 border border-amber-500/30 transition flex-shrink-0">
           ⚠️ Attendance 75% Check
@@ -629,18 +570,15 @@
         </button>
       </div>
 
-      <!-- CHAT MESSAGES BODY -->
       <div id="ai-chat-messages" class="flex-1 p-4 overflow-y-auto custom-scroll space-y-3.5 text-xs text-slate-200">
-        <!-- Messages -->
+        
       </div>
 
-      <!-- TYPING INDICATOR -->
       <div id="ai-chat-typing" class="hidden px-4 py-2 bg-slate-900/60 text-[11px] text-brand-400 flex items-center gap-2 border-t border-slate-800/50">
         <i class="fa-solid fa-spinner fa-spin"></i>
         <span>AI Copilot is analyzing your attendance and syllabus...</span>
       </div>
 
-      <!-- CHAT INPUT BAR -->
       <div class="p-3 bg-slate-950 border-t border-slate-800 flex items-center gap-2">
         <input type="text" id="ai-chat-input" placeholder="Ask about attendance, timetable, or YouTube resources..." class="flex-1 bg-slate-900 text-white placeholder-slate-500 rounded-xl px-3.5 py-2.5 text-xs border border-slate-700 focus:outline-none focus:border-brand-500 transition" onkeydown="if(event.key==='Enter') sendChatMessage()">
         <button onclick="sendChatMessage()" class="w-9 h-9 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white flex items-center justify-center transition shadow-md shadow-brand-500/20 flex-shrink-0">
@@ -650,7 +588,6 @@
 
     </div>
 
-    <!-- FLOATING ACTION BUTTON (TRIGGER) -->
     <button onclick="toggleChatWindow()" id="ai-chat-fab" class="group flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-gradient-to-r from-brand-600 via-indigo-600 to-amber-500 hover:from-brand-500 hover:to-amber-400 text-white shadow-xl shadow-brand-500/30 transition-all transform hover:scale-105 active:scale-95">
       <div class="relative flex items-center justify-center">
         <i class="fa-solid fa-wand-magic-sparkles text-base group-hover:rotate-12 transition"></i>
@@ -664,11 +601,8 @@
 
   </div>
 
-  <!-- ========================================== -->
-  <!-- JAVASCRIPT LOGIC & STATE ENGINE           -->
-  <!-- ========================================== -->
   <script>
-    // 1. EXACT TIMETABLE DATABASE FROM SCREENSHOT (SECTION K4P26NY)
+    
     const timetableSchedule = {
       "Monday": [
         { id: "mon_1", time: "10:10 - 11:00", code: "MEC136", type: "Tutorial (T)", room: "25-101A", group: "K4P26NY" },
@@ -705,7 +639,6 @@
       "Sunday": []
     };
 
-    // 2. COURSES FROM THE TIMETABLE (6 COURSES)
     const defaultTimetableCourses = [
       {
         id: "c_cse111",
@@ -799,7 +732,7 @@
         credits: 4,
         daysToExam: 4,
         ca1: 14, ca2: 17, ca3: 15, mtt: 16,
-        attPresent: 18, attDL: 0, attAbsent: 6, attCancelled: 0, // Lower attendance for demo: 18/24 = 75.0%
+        attPresent: 18, attDL: 0, attAbsent: 6, attCancelled: 0, 
         units: [
           { id: "u1", num: 1, title: "Linear Algebra: Rank, Eigenvalues, Eigenvectors & Cayley-Hamilton", score: 65, status: "completed" },
           { id: "u2", num: 2, title: "Differential & Integral Calculus: Higher-Order Derivatives & Integrals", score: 55, status: "completed" },
@@ -811,12 +744,11 @@
       }
     ];
 
-    // CURRENT APP STATE
     let appState = JSON.parse(localStorage.getItem('coursepilot_state_v3')) || {
-      currentDay: "Thursday", // Default today matches schedule
+      currentDay: "Thursday", 
       days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
       courses: defaultTimetableCourses,
-      dailyAttendanceLogs: {} // Key: "Thursday_thu_1" -> 'present' | 'absent' | 'dl' | 'cancelled'
+      dailyAttendanceLogs: {} 
     };
 
     let currentUser = JSON.parse(localStorage.getItem('coursepilot_user_creds')) || {
@@ -844,30 +776,26 @@
       alert("Attendance history and courses reset to timetable defaults!");
     }
 
-    // ==========================================
-    // ATTENDANCE CALCULATION ENGINE
-    // ==========================================
     function calculateCourseAttendance(c) {
       const present = Number(c.attPresent) || 0;
-      const dl = Number(c.attDL) || 0; // Duty Leave is technically Present!
+      const dl = Number(c.attDL) || 0; 
       const absent = Number(c.attAbsent) || 0;
-      const cancelled = Number(c.attCancelled) || 0; // Cancelled excluded from held
+      const cancelled = Number(c.attCancelled) || 0; 
 
       const effectiveAttended = present + dl;
-      const totalHeld = effectiveAttended + absent; // excluding cancelled
+      const totalHeld = effectiveAttended + absent; 
 
       const pct = totalHeld > 0 ? ((effectiveAttended / totalHeld) * 100) : 100;
       const pctRounded = Math.round(pct * 10) / 10;
       const isDanger = pctRounded < 75.0;
 
-      // Safe bunk margin or classes needed to recover
       let marginText = "";
       if (pctRounded >= 75.0) {
-        // How many can I bunk? (Attended / (Total + Bunks)) >= 0.75 => Bunks <= (Attended - 0.75*Total) / 0.75
+        
         const safeBunks = Math.floor((effectiveAttended - 0.75 * totalHeld) / 0.75);
         marginText = safeBunks > 0 ? `Can bunk ${safeBunks} more classes safely` : `On verge! Do not miss next class`;
       } else {
-        // How many to attend? ((Attended + X) / (Total + X)) >= 0.75 => X >= (0.75*Total - Attended) / 0.25
+        
         const needed = Math.ceil((0.75 * totalHeld - effectiveAttended) / 0.25);
         marginText = `Must attend ${needed} consecutive classes to reach 75%`;
       }
@@ -920,9 +848,6 @@
       };
     }
 
-    // ==========================================
-    // AUTHENTICATION & HEADER (SIGN IN / SIGN OUT)
-    // ==========================================
     function updateUserHeader() {
       const authContainer = document.getElementById('header-user-auth');
       
@@ -999,9 +924,6 @@
       alert(`Welcome back, ${name}! Your session is active with section ${section}.`);
     }
 
-    // ==========================================
-    // TAB SWITCHER
-    // ==========================================
     function switchTab(tabId) {
       ['view-app', 'view-courses', 'view-exams', 'view-slides', 'view-report'].forEach(id => {
         document.getElementById(id).classList.add('hidden');
@@ -1039,9 +961,6 @@
       }
     }
 
-    // ==========================================
-    // DAY PILLS & TIMETABLE SELECTOR
-    // ==========================================
     function renderDayPills() {
       const container = document.getElementById('day-pills');
       container.innerHTML = appState.days.map(d => `
@@ -1058,9 +977,6 @@
       saveState();
     }
 
-    // ==========================================
-    // RENDER TODAY'S CLASS SCHEDULE & ROLL CALL
-    // ==========================================
     function renderDailySchedule() {
       const day = appState.currentDay || "Thursday";
       document.getElementById('daily-schedule-title').innerText = `Class Schedule · ${day}`;
@@ -1068,7 +984,6 @@
       const container = document.getElementById('daily-classes-container');
       const classes = timetableSchedule[day] || [];
 
-      // SATURDAY & SUNDAY CHECK (BLANK STATE)
       if (day === "Saturday" || day === "Sunday" || classes.length === 0) {
         container.innerHTML = `
           <div class="glass-card rounded-2xl p-8 text-center border-slate-800 space-y-3 bg-gradient-to-b from-slate-900 to-slate-950">
@@ -1111,18 +1026,16 @@
                 </div>
               </div>
 
-              <!-- Status Badge -->
               <div>
                 ${getStatusBadge(currentStatus)}
               </div>
             </div>
 
-            <!-- ATTENDANCE INTERACTION BUTTONS (PRESENT, ABSENT, DL, CANCELLED) -->
             <div class="pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2">
               <span class="text-[11px] font-bold text-slate-400">Mark Attendance:</span>
               
               <div class="flex items-center gap-1.5 text-xs">
-                <!-- Present -->
+                
                 <button onclick="markClassAttendance('${item.code}', '${logKey}', 'present')" class="px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-bold ${
                   currentStatus === 'present' 
                   ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30 ring-2 ring-emerald-400/40' 
@@ -1131,7 +1044,6 @@
                   <i class="fa-solid fa-check"></i> Present
                 </button>
 
-                <!-- Absent -->
                 <button onclick="markClassAttendance('${item.code}', '${logKey}', 'absent')" class="px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-bold ${
                   currentStatus === 'absent' 
                   ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30 ring-2 ring-rose-400/40' 
@@ -1140,7 +1052,6 @@
                   <i class="fa-solid fa-xmark"></i> Absent
                 </button>
 
-                <!-- Duty Leave (DL) -->
                 <button onclick="markClassAttendance('${item.code}', '${logKey}', 'dl')" class="px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-bold ${
                   currentStatus === 'dl' 
                   ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 ring-2 ring-indigo-400/40' 
@@ -1149,7 +1060,6 @@
                   <i class="fa-solid fa-clipboard-check"></i> DL (Duty Leave)
                 </button>
 
-                <!-- Class Cancelled -->
                 <button onclick="markClassAttendance('${item.code}', '${logKey}', 'cancelled')" class="px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 font-bold ${
                   currentStatus === 'cancelled' 
                   ? 'bg-amber-600 text-white shadow-md shadow-amber-600/30 ring-2 ring-amber-400/40' 
@@ -1183,13 +1093,11 @@
       const course = appState.courses.find(c => c.code === courseCode);
       if (!course) return;
 
-      // Revert previous effect if already marked
       if (prevStatus === 'present') course.attPresent = Math.max(0, course.attPresent - 1);
       else if (prevStatus === 'dl') course.attDL = Math.max(0, course.attDL - 1);
       else if (prevStatus === 'absent') course.attAbsent = Math.max(0, course.attAbsent - 1);
       else if (prevStatus === 'cancelled') course.attCancelled = Math.max(0, course.attCancelled - 1);
 
-      // Apply new status
       if (newStatus === 'present') course.attPresent++;
       else if (newStatus === 'dl') course.attDL++;
       else if (newStatus === 'absent') course.attAbsent++;
@@ -1199,9 +1107,6 @@
       saveState();
     }
 
-    // ==========================================
-    // METRICS ROW & DANGER NOTIFICATION
-    // ==========================================
     function updateAttendanceDashboardMetrics() {
       const overall = calculateOverallAttendance();
       
@@ -1210,7 +1115,6 @@
       document.getElementById('stat-dl-count').innerText = `${overall.totalDL} DLs`;
       document.getElementById('stat-danger-courses-count').innerText = overall.dangerList.length;
 
-      // Overall Danger Banner
       const dangerBanner = document.getElementById('overall-attendance-danger-banner');
       const overallCard = document.getElementById('card-overall-att-border');
 
@@ -1238,7 +1142,6 @@
         document.getElementById('stat-danger-courses-label').innerText = `All courses meet required criteria`;
       }
 
-      // Subject attendance progress bars
       const barContainer = document.getElementById('subject-attendance-bars');
       barContainer.innerHTML = appState.courses.map(c => {
         const stats = calculateCourseAttendance(c);
@@ -1259,7 +1162,6 @@
         `;
       }).join('');
 
-      // Notifications in Bell
       updateNotificationBell(overall);
     }
 
@@ -1312,9 +1214,6 @@
       document.getElementById('notif-dropdown').classList.toggle('hidden');
     }
 
-    // ==========================================
-    // VIEW 2: COURSES & CONTINUOUS ASSESSMENT
-    // ==========================================
     function renderCoursesView() {
       const container = document.getElementById('all-courses-cards-container');
       container.innerHTML = appState.courses.map(c => {
@@ -1326,7 +1225,6 @@
         return `
           <div class="glass-card rounded-2xl p-5 border ${attStats.isDanger ? 'border-rose-500/80 bg-rose-950/10' : 'border-slate-800'} space-y-4">
             
-            <!-- Header -->
             <div class="flex items-start justify-between">
               <div>
                 <div class="flex items-center gap-2">
@@ -1340,7 +1238,6 @@
               </button>
             </div>
 
-            <!-- Danger Warning if < 75% -->
             ${attStats.isDanger ? `
               <div class="p-2.5 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-bold flex items-center gap-2 animate-pulse">
                 <i class="fa-solid fa-triangle-exclamation text-sm"></i>
@@ -1348,7 +1245,6 @@
               </div>
             ` : ''}
 
-            <!-- Attendance Stats Grid -->
             <div class="grid grid-cols-4 gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800 text-center text-xs">
               <div>
                 <span class="text-[10px] text-slate-400 block">Present</span>
@@ -1368,7 +1264,6 @@
               </div>
             </div>
 
-            <!-- Continuous Assessment Inputs (CA1, CA2, CA3) -->
             <div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 text-xs space-y-2">
               <div class="flex items-center justify-between">
                 <span class="text-[11px] font-bold text-slate-300">Continuous Assessment (Best 2 of 3)</span>
@@ -1390,7 +1285,6 @@
               </div>
             </div>
 
-            <!-- Action buttons -->
             <div class="flex items-center justify-between text-xs pt-1">
               <button onclick="askAiResourcesForCourse('${c.code}', '${c.title}')" class="text-amber-400 hover:text-amber-300 font-bold flex items-center gap-1.5">
                 <i class="fa-brands fa-youtube text-red-500"></i>
@@ -1412,9 +1306,6 @@
       }
     }
 
-    // ==========================================
-    // VIEW 3: EXAM TARGET HUB (MTT & ETT)
-    // ==========================================
     function renderExamHub() {
       const container = document.getElementById('exam-cards-container');
       
@@ -1427,9 +1318,8 @@
         const caList = [Number(c.ca1)||0, Number(c.ca2)||0, Number(c.ca3)||0].sort((a,b)=>b-a);
         const caScaled = ((caList[0] + caList[1]) / 60) * 30;
         const mttMarks = Number(c.mtt) || 0;
-        const totalInternal = caScaled + mttMarks; // out of 60
+        const totalInternal = caScaled + mttMarks; 
 
-        // Target A+ = 80/100 => needed in ETT out of 40 = 80 - totalInternal
         const neededInEttRaw = Math.max(0, Math.min(100, Math.round(((80 - totalInternal) / 40) * 100)));
 
         return `
@@ -1444,7 +1334,6 @@
               </span>
             </div>
 
-            <!-- Mid-Term (MTT) Input -->
             <div class="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 flex items-center justify-between text-xs">
               <div>
                 <span class="font-bold text-white block">Mid-Term Examination (MTT)</span>
@@ -1456,7 +1345,6 @@
               </div>
             </div>
 
-            <!-- ETT Target Projection Box -->
             <div class="bg-gradient-to-r from-slate-900 to-indigo-950/60 p-4 rounded-xl border border-indigo-500/30 space-y-2 text-xs">
               <div class="flex items-center justify-between">
                 <span class="text-slate-300">Total Internal Earned: <strong>${totalInternal.toFixed(1)} / 60</strong></span>
@@ -1488,9 +1376,6 @@
       }
     }
 
-    // ==========================================
-    // EDIT COURSE MODAL LOGIC
-    // ==========================================
     function openEditCourseModal(courseId) {
       const course = appState.courses.find(c => c.id === courseId);
       if (!course) return;
@@ -1531,9 +1416,6 @@
       }
     }
 
-    // ==========================================
-    // IMPROVED CHARTS (ALL RADAR vs PER-COURSE BAR)
-    // ==========================================
     let chartInstance = null;
 
     function populateGraphSelectorOptions() {
@@ -1619,9 +1501,6 @@
       }
     }
 
-    // ==========================================
-    // AI RESOURCE SEARCH & YOUTUBE / SOCIAL MEDIA
-    // ==========================================
     function askAiResourcesForCourse(courseCode, courseTitle) {
       toggleChatWindow();
       handleQuickPrompt(`Give me dedicated YouTube playlists, GitHub notes, and community resources for ${courseCode} (${courseTitle})`);
@@ -1666,9 +1545,6 @@
       ];
     }
 
-    // ==========================================
-    // CHATBOT INTERACTION LOGIC
-    // ==========================================
     let chatHistory = [];
 
     function toggleChatWindow() {
@@ -1778,7 +1654,6 @@
     function generateAiResponse(query) {
       const q = query.toLowerCase();
 
-      // 1. ATTENDANCE & DUTY LEAVE (DL) QUERY
       if (q.includes('attendance') || q.includes('dl') || q.includes('duty leave') || q.includes('75') || q.includes('criteria') || q.includes('debar')) {
         const overall = calculateOverallAttendance();
         return `
@@ -1792,7 +1667,6 @@
         `;
       }
 
-      // 2. RESOURCE SEARCH & SOCIAL MEDIA / YOUTUBE
       if (q.includes('resource') || q.includes('youtube') || q.includes('playlist') || q.includes('notes') || q.includes('cheatsheet')) {
         let matchedCourse = appState.courses.find(c => q.includes(c.code.toLowerCase())) || appState.courses[0];
         const resources = getCuratedSocialMediaResources(matchedCourse.code);
@@ -1814,7 +1688,6 @@
         `;
       }
 
-      // 3. INT335 VIVA TIPS
       if (q.includes('viva') || q.includes('int335') || q.includes('design thinking')) {
         return `
           <p class="font-bold text-white"><i class="fa-solid fa-graduation-cap text-indigo-400 mr-1"></i> INT335 Viva Tips:</p>
@@ -1825,7 +1698,6 @@
         `;
       }
 
-      // Default
       return `
         <p class="font-bold text-white">How can I assist your timetable & studies today?</p>
         <ul class="list-disc pl-4 space-y-1 mt-1 text-[11px] text-slate-300">
@@ -1845,7 +1717,6 @@
       renderSelectedGraph();
       updateUserHeader();
     }
-
 
     const slidesData = [
       {
@@ -2318,7 +2189,6 @@
               </div>
             </div>
 
-            <!-- NABC SUMMARY -->
             <div class="glass-card p-4 rounded-xl border-brand-500/30 space-y-2">
               <span class="text-[11px] font-bold text-brand-400 uppercase tracking-wider block">The One-Line NABC Close</span>
               <div class="grid grid-cols-1 sm:grid-cols-4 gap-2 text-[11px]">
@@ -2362,7 +2232,6 @@
         <div>${slide.content}</div>
       `;
 
-      // Render Thumbnails
       const thumbContainer = document.getElementById('slide-thumbnails');
       thumbContainer.innerHTML = slidesData.map((s, idx) => `
         <button onclick="goToSlide(${idx})" class="flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition ${
@@ -2403,7 +2272,6 @@
       }
     }
 
-    // Keyboard arrow navigation for slides
     window.addEventListener('keydown', (e) => {
       if (!document.getElementById('view-slides').classList.contains('hidden')) {
         if (e.key === 'ArrowRight' || e.key === ' ') {
@@ -2414,9 +2282,6 @@
       }
     });
 
-    // ==========================================
-    // REPORT RENDERER & TOC
-    // ==========================================
     const reportSections = [
       { id: "part-1", title: "Part 1: Cover Page & Metadata" },
       { id: "part-2", title: "Part 2: Team Roster & Roles" },
@@ -2451,7 +2316,6 @@
       `).join('');
     }
 
-    // Populate Report text into report view
     function populateReportView() {
       const body = document.getElementById('report-rendered-body');
       body.innerHTML = `
@@ -2543,10 +2407,6 @@
       `;
     }
 
-    
-
-
-    // ON DOM LOAD INITIALIZATION
     window.addEventListener('DOMContentLoaded', () => {
       renderApp();
       renderCoursesView();
